@@ -89,38 +89,26 @@
 
   .hero-wordmark {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 18vw, 180px);
+    font-size: clamp(80px, 18vw, 180px);
     letter-spacing: 0.08em;
     line-height: 0.9;
     color: var(--text-primary);
     position: relative;
     display: flex;
     align-items: flex-end;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 0;
   }
   .hero-wordmark .hl { color: var(--accent); }
 
   .hero-tagline {
     font-family: 'Share Tech Mono', monospace;
-    font-size: clamp(9px, 2.5vw, 12px);
+    font-size: clamp(9px, 1.1vw, 12px);
     letter-spacing: 0.2em;
     color: var(--text-muted);
     text-transform: uppercase;
     margin-bottom: 0.18em;
     margin-left: 0.3em;
     white-space: nowrap;
-    align-self: flex-end;
-  }
-  @media (max-width: 480px) {
-    .hero-tagline {
-      width: 100%;
-      text-align: center;
-      margin-left: 0;
-      margin-top: 8px;
-      font-size: 9px;
-    }
   }
 
   /* mission box */
@@ -660,15 +648,6 @@
   .venue-dates-list { display: flex; flex-direction: column; gap: 8px; }
   .venue-date { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border); }
   .date-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--text-primary); }
-  .date-time {
-    display: none;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px; letter-spacing: 0.15em;
-    color: var(--text-muted); text-transform: uppercase;
-  }
-  @media (hover: none) {
-    .date-time { display: block; }
-  }
   .date-status { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
   .date-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 4px rgba(61,220,151,0.7); display: inline-block; }
   .venue-back-name { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 0.08em; line-height: 1; color: var(--text-primary); }
@@ -1229,29 +1208,6 @@
 
   @media (hover: none) {
     .mobile-hint::after { content: 'TAP TO REVEAL'; font-size: 7px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; opacity: 0.5; }
-    .card { perspective: none; }
-    .card-inner {
-      transform-style: flat;
-      transition: none;
-      position: relative;
-      min-height: 460px;
-    }
-    .card:hover .card-inner { transform: none; }
-    .card-front {
-      position: absolute; inset: 0; transform: none;
-      backface-visibility: visible; -webkit-backface-visibility: visible;
-      opacity: 1; z-index: 2; transition: opacity 0.3s ease; pointer-events: all;
-    }
-    .card-back {
-      position: absolute; inset: 0; transform: none;
-      backface-visibility: visible; -webkit-backface-visibility: visible;
-      opacity: 0; z-index: 1; transition: opacity 0.3s ease; pointer-events: none;
-    }
-    .card.tapped .card-front { opacity: 0; z-index: 1; pointer-events: none; }
-    .card.tapped .card-back  { opacity: 1; z-index: 2; pointer-events: all; }
-    .venue-card:hover .venue-inner { transform: none; }
-    .venue-inner { transition: none; }
-    .page-footer { display: none; }
   }
   @media (hover: hover) {
     .mobile-hint::after { content: 'HOVER TO REVEAL'; font-size: 7px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; opacity: 0.5; }
@@ -1318,12 +1274,12 @@
           <div class="venue-dates">
             <div class="venue-dates-label">// Scheduled Dates</div>
             <div class="venue-dates-list">
-              <div class="venue-date"><span class="date-val">05.01.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
-              <div class="venue-date"><span class="date-val">06.05.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
-              <div class="venue-date"><span class="date-val">07.03.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
-              <div class="venue-date"><span class="date-val">08.07.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
-              <div class="venue-date"><span class="date-val">09.04.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
-              <div class="venue-date"><span class="date-val">10.02.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">05.01.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">06.05.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">07.03.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">08.07.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">09.04.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">10.02.26</span><span class="date-status">Confirmed</span></div>
             </div>
           </div>
         </div>
