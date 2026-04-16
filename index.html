@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weightless — We Are Here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #080a0e;
+    --bg2:        #0d1117;
+    --bg3:        #111620;
+    --border:     rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.18);
+    --text-primary:   #f0f2f5;
+    --text-secondary: #8892a0;
+    --text-muted:     #4a5568;
+    --accent:     #00d4ff;
+    --accent-dim: rgba(0,212,255,0.12);
+    --green:      #3ddc97;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─────────────────────────────────────────
+     HERO / MISSION SECTION
+  ───────────────────────────────────────── */
+  .hero {
+    min-height: 80svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ambient glow */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* top rule */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0.8;
+  }
+
+  .hero-wordmark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 18vw, 180px);
+    letter-spacing: 0.08em;
+    line-height: 0.9;
+    color: var(--text-primary);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+  }
+  .hero-wordmark .hl { color: var(--accent); }
+
+  .hero-tagline {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(9px, 2.5vw, 12px);
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.18em;
+    margin-left: 0.3em;
+    white-space: nowrap;
+    align-self: flex-end;
+  }
+  .wl-text { white-space: nowrap; }
+  .wl-dot { white-space: nowrap; }
+  @media (max-width: 480px) {
+    .hero-tagline {
+      width: 100%;
+      text-align: center;
+      margin-left: 0;
+      margin-top: 8px;
+      font-size: 9px;
+    }
+  }
+
+  /* mission box */
+  .mission-box {
+    max-width: 680px;
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 40px 44px;
+    position: relative;
+  }
+  .mission-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.6;
+  }
+  .mission-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .mission-text {
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.85;
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .mission-text em {
+    color: var(--text-primary);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-scroll {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+  .scroll-arrow {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    margin: 0 auto;
+    animation: pulse-down 2s ease-in-out infinite;
+  }
+  @keyframes pulse-down {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 24px;
+    margin-top: 4px;
+  }
+  .hero-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero-link:hover { color: var(--accent); }
+  .hero-link::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  /* ─────────────────────────────────────────
+     ROSTER SECTION DIVIDER
+  ───────────────────────────────────────── */
+  .roster-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px 16px;
+  }
+  .roster-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .roster-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── HEADER (kept for non-hero view) ── */
+  .page-header {
+    text-align: center;
+    padding: 72px 24px 56px;
+    position: relative;
+    overflow: hidden;
+    display: none; /* hidden — hero replaces it */
+  }
+
+  /* ── GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    row-gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2px 80px;
+  }
+  @media (min-width: 1100px) {
+    .card-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (min-width: 1500px) {
+    .card-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  /* ── CARD ── */
+  .card {
+    position: relative;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    perspective: 1200px;
+    transition: border-color 0.3s ease;
+  }
+  .card:hover { border-color: var(--border-hover); z-index: 2; }
+
+  .card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ── FLIP ── */
+  .card-inner {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+  }
+  .card:hover .card-inner { transform: rotateY(180deg); }
+
+  .card-front, .card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card-front {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+  .card-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--bg2);
+    position: relative; z-index: 2;
+    overflow: hidden;
+  }
+  .card-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .card-id, .card-num-badge { position: relative; z-index: 1; }
+
+  .arch-cyan .card-band::before,   .arch-cyan.card-band::before   { background: repeating-linear-gradient(45deg, #00d4ff 0px, #00d4ff 1px, transparent 1px, transparent 8px); }
+  .arch-violet .card-band::before, .arch-violet.card-band::before { background: repeating-linear-gradient(0deg, #7b2fff 0px, #7b2fff 1px, transparent 1px, transparent 10px), repeating-linear-gradient(90deg, #7b2fff 0px, #7b2fff 1px, transparent 1px, transparent 10px); }
+  .arch-ember .card-band::before,  .arch-ember.card-band::before  { background: repeating-linear-gradient(-45deg, #ff4500 0px, #ff4500 1px, transparent 1px, transparent 10px); }
+  .arch-gold .card-band::before,   .arch-gold.card-band::before   { background: repeating-linear-gradient(60deg, #e8b84b 0px, #e8b84b 1px, transparent 1px, transparent 6px); }
+  .card-id {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .card-num-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px; letter-spacing: 0.15em;
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+    padding: 2px 8px;
+  }
+
+  /* ── FRONT: PHOTO ── */
+  .card-photo {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+    flex-shrink: 0;
+  }
+  .card-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(15%) contrast(1.05);
+    transition: filter 0.4s ease, transform 0.4s ease;
+  }
+  .card:hover .card-photo img { filter: grayscale(0%) contrast(1.1); transform: scale(1.03); }
+  .card-photo img.pos-carbon { object-position: center 20%; transform: scale(0.82); transform-origin: center top; }
+  .card-photo img.pos-eric   { object-position: center 20%; transform: scale(0.82); transform-origin: center top; }
+  .card-photo img.pos-kayla  { object-position: 40% 20%;   transform: scale(0.82); transform-origin: center top; }
+  .card:hover .card-photo img.pos-carbon,
+  .card:hover .card-photo img.pos-eric,
+  .card:hover .card-photo img.pos-kayla { transform: scale(0.85); }
+  .card-photo img.pos-blossomn { object-position: center 8%; transform: scale(0.72); transform-origin: center top; }
+  .card:hover .card-photo img.pos-blossomn { transform: scale(0.75); }
+  .card-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(8,10,14,0.5) 62%,
+      rgba(8,10,14,0.96) 100%
+    );
+    z-index: 1;
+  }
+
+  /* scan line */
+  .scan-line {
+    position: absolute;
+    left: 0; right: 0; top: -4px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.0) 5%, rgba(0,212,255,0.6) 30%, rgba(0,212,255,0.9) 50%, rgba(0,212,255,0.6) 70%, rgba(0,212,255,0.0) 95%, transparent 100%);
+    z-index: 3;
+    animation: scan 3.5s ease-in-out infinite;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(0,212,255,0.4), 0 0 20px rgba(0,212,255,0.15);
+  }
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(0,212,255,0.08), transparent);
+  }
+  @keyframes scan {
+    0%   { top: -4px; opacity: 0; }
+    5%   { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  .card:nth-child(1) .scan-line { animation-delay: 0s; }
+  .card:nth-child(2) .scan-line { animation-delay: 0.8s; }
+  .card:nth-child(3) .scan-line { animation-delay: 1.6s; }
+  .card:nth-child(4) .scan-line { animation-delay: 2.4s; }
+  .card:nth-child(5) .scan-line { animation-delay: 3.2s; }
+  .card:nth-child(6) .scan-line { animation-delay: 0.4s; }
+
+  .card-jersey {
+    position: absolute;
+    top: 8px; right: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; line-height: 1;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: 0.02em;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .card-name-overlay {
+    position: absolute;
+    bottom: 14px; left: 16px; right: 16px;
+    z-index: 4;
+  }
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 5vw, 56px);
+    letter-spacing: 0.06em; line-height: 1;
+    color: var(--text-primary);
+    transition: color 0.3s;
+  }
+  .card:hover .card-name { color: #fff; }
+  .card-role {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-top: 5px; text-transform: uppercase;
+  }
+  .card-skills {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-top: 3px; text-transform: uppercase;
+  }
+
+  .card-back {
+    position: absolute; inset: 0;
+  }
+
+  /* ── FRONT: TOP BAND ── */
+  .stat-cell { background: var(--bg2); padding: 10px 14px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .card-archetype {
+    background: var(--bg3);
+    border-top: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    gap: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-archetype::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .archetype-label, .archetype-value { position: relative; z-index: 1; }
+
+  /* Pattern 1 — Cyan Pulse: diagonal lines */
+  .arch-cyan::before {
+    background: repeating-linear-gradient(
+      45deg,
+      #00d4ff 0px, #00d4ff 1px,
+      transparent 1px, transparent 8px
+    );
+  }
+  /* Pattern 2 — Violet Grid: crosshatch */
+  .arch-violet::before {
+    background:
+      repeating-linear-gradient(0deg, #7b2fff 0px, #7b2fff 1px, transparent 1px, transparent 10px),
+      repeating-linear-gradient(90deg, #7b2fff 0px, #7b2fff 1px, transparent 1px, transparent 10px);
+  }
+  /* Pattern 3 — Ember: wide diagonal */
+  .arch-ember::before {
+    background: repeating-linear-gradient(
+      -45deg,
+      #ff4500 0px, #ff4500 1px,
+      transparent 1px, transparent 10px
+    );
+  }
+  /* Pattern 4 — Gold Weave: fine diagonal */
+  .arch-gold::before {
+    background: repeating-linear-gradient(
+      60deg,
+      #e8b84b 0px, #e8b84b 1px,
+      transparent 1px, transparent 6px
+    );
+  }
+  .archetype-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.25em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  .archetype-value {
+    font-family: 'Cinzel', serif;
+    font-size: 13px; letter-spacing: 0.08em;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase; margin-bottom: 2px;
+  }
+  .stat-value {
+    font-size: 12px; font-weight: 500;
+    color: var(--text-primary); letter-spacing: 0.02em;
+  }
+
+  /* ── FRONT: BOTTOM BAR — removed ── */
+
+  .card-role {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-top: 5px; text-transform: uppercase;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .card-role .status-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 4px rgba(61,220,151,0.7);
+    flex-shrink: 0;
+  }
+
+  /* ── BACK ── */
+  .card-back {
+    transform: rotateY(180deg);
+    background: var(--bg3);
+    padding: 22px 20px 18px;
+    justify-content: space-between;
+  }
+
+  .back-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+  .back-name-block {}
+  .back-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 0.08em; line-height: 1;
+    color: var(--text-primary);
+  }
+  .back-project {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-top: 5px; text-transform: uppercase;
+  }
+
+  .back-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1.5px solid var(--accent-dim);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(0,212,255,0.15), 0 0 16px rgba(0,212,255,0.08);
+  }
+  .back-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(10%) contrast(1.05);
+  }
+
+  .back-divider {
+    height: 1px;
+    background: linear-gradient(90deg, #ff0080, #ff4500, #ffaa00, #00ff88, #00d4ff, #7b2fff, #ff0080);
+    opacity: 0.6;
+    margin: 14px 0 14px;
+  }
+
+  .back-bio {
+    font-size: 14px; line-height: 1.75;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .back-fact {
+    margin-top: 16px;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+  }
+  .back-fact-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 5px; text-transform: uppercase;
+  }
+  .back-fact-text {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .back-quote-wrap {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    text-align: center;
+  }
+  .back-quote {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px; letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .back-quote::before { content: '"'; }
+  .back-quote::after  { content: '"'; }
+
+  /* ── FOOTER / HINT LABEL ── */
+  .page-footer { text-align: center; padding: 32px 24px 24px; }
+  .footer-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.3em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+
+  /* ── VENUE SECTION ── */
+  .venue-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2px 80px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 0 32px;
+  }
+  .section-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .venue-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+  }
+  .venue-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+    position: relative;
+    perspective: 1200px;
+    cursor: pointer;
+  }
+  .venue-card:hover { border-color: var(--border-hover); }
+  .venue-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+  }
+  .venue-card:hover .venue-inner { transform: rotateY(180deg); }
+  .venue-front, .venue-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .venue-front { width: 100%; }
+  .venue-back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    background: var(--bg3);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .venue-photo {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+  .venue-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+  .venue-card:hover .venue-photo img { transform: scale(1.03); filter: grayscale(0%) contrast(1.1); }
+  .venue-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(8,10,14,0.55) 70%, rgba(8,10,14,0.97) 100%);
+  }
+  .venue-name-overlay { position: absolute; bottom: 16px; left: 18px; z-index: 2; }
+  .venue-name { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.08em; line-height: 1; color: #fff; }
+  .venue-url { font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--accent); margin-top: 4px; text-transform: uppercase; }
+  .venue-dates { padding: 16px 18px 18px; border-top: 1px solid var(--border); }
+  .venue-dates-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+  .venue-dates-list { display: flex; flex-direction: column; gap: 8px; }
+  .venue-date { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border); }
+  .date-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--text-primary); }
+  .date-time {
+    display: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  @media (hover: none) {
+    .date-time { display: block; }
+  }
+  .date-status { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+  .date-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 4px rgba(61,220,151,0.7); display: inline-block; }
+  .venue-back-name { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 0.08em; line-height: 1; color: var(--text-primary); }
+  .venue-back-sub { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 0.25em; color: var(--accent); margin-top: 5px; text-transform: uppercase; }
+  .venue-back-divider { height: 1px; background: linear-gradient(90deg, #ff0080, #ff4500, #ffaa00, #00ff88, #00d4ff, #7b2fff, #ff0080); opacity: 0.6; margin: 16px 0; }
+  .venue-back-desc { font-size: 12px; line-height: 1.7; color: var(--text-secondary); font-weight: 300; flex: 1; }
+  .venue-back-dates { margin-top: 20px; }
+  .venue-back-dates-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .venue-back-date { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg2); border: 1px solid var(--border); margin-bottom: 6px; }
+  .venue-back-date:last-child { margin-bottom: 0; }
+  .venue-back-link { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 14px; font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+  .venue-back-link span { color: var(--accent); }
+
+  /* ── PATREON CTA ── */
+  .patreon-cta {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .patreon-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.4;
+  }
+  .patreon-cta::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .patreon-cta-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .patreon-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .patreon-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    letter-spacing: 0.1em;
+    line-height: 1;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+  }
+  .patreon-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .patreon-btn {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 16px 40px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  .patreon-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,212,255,0.3);
+  }
+
+
+  @media (hover: none) {
+    .card { perspective: none; }
+    .card-inner { transform-style: flat; transition: none; position: relative; height: 100%; }
+    .card:hover .card-inner { transform: none; }
+    .card-front {
+      position: absolute; inset: 0; transform: none;
+      backface-visibility: visible; -webkit-backface-visibility: visible;
+      opacity: 1; z-index: 2; transition: opacity 0.3s ease; pointer-events: all;
+    }
+    .card-back {
+      position: absolute; inset: 0; transform: none;
+      backface-visibility: visible; -webkit-backface-visibility: visible;
+      opacity: 0; z-index: 1; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    .card.tapped .card-front { opacity: 0; z-index: 1; pointer-events: none; }
+    .card.tapped .card-back  { opacity: 1; z-index: 2; pointer-events: all; }
+    .venue-card:hover .venue-inner { transform: none; }
+    .venue-inner { transition: none; }
+    .page-footer { display: none; }
+  }
+
+  /* ── SMS SIGNUP SECTION ── */
+  .sms-section {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sms-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .sms-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .sms-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .sms-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    letter-spacing: 0.1em;
+    line-height: 1;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  .sms-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .sms-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .sms-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 520px) {
+    .sms-fields { grid-template-columns: 1fr; }
+  }
+  .sms-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+  .sms-field-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .sms-input {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .sms-input::placeholder { color: var(--text-muted); }
+  .sms-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(0,212,255,0.2), 0 0 20px rgba(0,212,255,0.06);
+  }
+  .sms-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 18px 40px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-top: 4px;
+    width: 100%;
+  }
+  .sms-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,212,255,0.3);
+  }
+  .sms-btn-arrow { font-size: 16px; }
+  .sms-fine-print {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  /* success state */
+  .sms-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 0 8px;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .sms-success-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    color: var(--accent);
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  }
+  .sms-success-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 0.1em;
+    color: var(--text-primary);
+  }
+  .sms-success-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+  }
+
+  /* ── COMMUNITY / PATREON ── */
+  .community-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 860px) {
+    .community-section { grid-template-columns: 1fr; gap: 48px; padding: 64px 24px; }
+  }
+  .community-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.4em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 20px; opacity: 0.8;
+  }
+  .community-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 88px);
+    letter-spacing: 0.06em; line-height: 1.0;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+  }
+  .community-hl { color: var(--accent); }
+  .community-body {
+    font-size: 15px; line-height: 1.9;
+    color: var(--text-secondary); font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .community-btn {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 14px 32px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-bottom: 40px;
+  }
+  .community-btn:hover {
+    background: var(--accent); color: var(--bg);
+    box-shadow: 0 0 24px rgba(0,212,255,0.25);
+  }
+  .community-stats {
+    display: flex; align-items: center; gap: 24px;
+  }
+  .community-stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px; letter-spacing: 0.08em;
+    color: var(--text-primary); line-height: 1;
+  }
+  .community-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.2em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .community-stat-divider {
+    width: 1px; height: 36px; background: var(--border);
+  }
+  .community-right {
+    position: relative;
+  }
+  .community-manifesto {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    padding: 40px 36px;
+    position: relative;
+  }
+  .manifesto-line {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.35em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 20px; opacity: 0.8;
+  }
+  .manifesto-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    margin-bottom: 36px;
+  }
+  .manifesto-list li {
+    font-size: 14px; line-height: 1.6;
+    color: var(--text-secondary); font-weight: 300;
+    padding-left: 16px; position: relative;
+  }
+  .manifesto-list li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--accent); opacity: 0.6;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .manifesto-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 0.06em;
+    color: var(--text-primary); line-height: 1.2;
+    border-top: 1px solid var(--border);
+    padding-top: 24px; margin-top: 8px;
+  }
+  .manifesto-attr {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ── OPEN POSITIONS ── */
+  .positions-section {
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 0 0 80px;
+  }
+  .positions-header {
+    display: flex; align-items: center; gap: 20px;
+    max-width: 1200px; margin: 0 auto;
+    padding: 32px 40px 0;
+  }
+  @media (max-width: 600px) { .positions-header { padding: 24px 24px 0; } }
+  .positions-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--accent); text-transform: uppercase; white-space: nowrap;
+  }
+  .positions-line { flex: 1; height: 1px; background: var(--border); }
+  .positions-intro {
+    max-width: 1200px; margin: 0 auto;
+    padding: 24px 40px 40px;
+  }
+  @media (max-width: 600px) { .positions-intro { padding: 20px 24px 32px; } }
+  .positions-intro p {
+    font-size: 14px; color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em; line-height: 1.7;
+  }
+  .positions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 40px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  @media (max-width: 600px) { .positions-grid { padding: 0 24px; } }
+  .position-card {
+    background: var(--bg);
+    padding: 28px 24px;
+    cursor: pointer;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .position-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .position-card:hover { background: var(--bg2); }
+  .position-card:hover::before { opacity: 0.5; }
+  .position-id {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.25em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  .position-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing: 0.06em; line-height: 1.1;
+    color: var(--text-primary);
+    transition: color 0.2s;
+  }
+  .position-card:hover .position-title { color: var(--accent); }
+  .position-desc {
+    font-size: 13px; line-height: 1.7;
+    color: var(--text-secondary); font-weight: 300;
+    flex: 1;
+  }
+  .position-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .position-tag-pill {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    border: 1px solid var(--accent-dim);
+    padding: 3px 10px;
+  }
+  .position-apply {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    color: var(--text-muted); text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .position-card:hover .position-apply { color: var(--accent); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(8,10,14,0.85);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+  .modal-box {
+    background: var(--bg2);
+    border: 1px solid var(--border-hover);
+    border-top: 2px solid var(--accent);
+    max-width: 480px; width: 100%;
+    padding: 44px 40px;
+    position: relative;
+  }
+  @media (max-width: 520px) { .modal-box { padding: 36px 24px; } }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px; color: var(--text-muted);
+    cursor: pointer; letter-spacing: 0.1em;
+    transition: color 0.2s; padding: 4px 8px;
+  }
+  .modal-close:hover { color: var(--accent); }
+  .modal-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 0.4em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 12px; opacity: 0.8;
+  }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px; letter-spacing: 0.06em; line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  .modal-divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0.4; margin-bottom: 24px;
+  }
+  .modal-body {
+    font-size: 14px; line-height: 1.8;
+    color: var(--text-secondary); font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .modal-email {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+  }
+  .modal-email:hover { border-bottom-color: var(--accent); }
+  .modal-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 32px;
+  }
+  .modal-list li {
+    font-size: 13px; line-height: 1.6;
+    color: var(--text-secondary); font-weight: 300;
+    padding-left: 16px; position: relative;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+  .modal-list li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent); opacity: 0.7;
+  }
+  .modal-btn {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--bg); background: var(--accent);
+    padding: 14px 32px;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .modal-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 24px rgba(0,212,255,0.25);
+  }
+
+  @media (hover: none) {
+    .mobile-hint::after { content: 'TAP TO REVEAL'; font-size: 7px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; opacity: 0.5; }
+    .card { perspective: none; }
+    .card-inner {
+      transform-style: flat;
+      transition: none;
+      position: relative;
+      min-height: 460px;
+    }
+    .card:hover .card-inner { transform: none; }
+    .card-front {
+      position: absolute; inset: 0; transform: none;
+      backface-visibility: visible; -webkit-backface-visibility: visible;
+      opacity: 1; z-index: 2; transition: opacity 0.3s ease; pointer-events: all;
+    }
+    .card-back {
+      position: absolute; inset: 0; transform: none;
+      backface-visibility: visible; -webkit-backface-visibility: visible;
+      opacity: 0; z-index: 1; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    .card.tapped .card-front { opacity: 0; z-index: 1; pointer-events: none; }
+    .card.tapped .card-back  { opacity: 1; z-index: 2; pointer-events: all; }
+    .venue-card:hover .venue-inner { transform: none; }
+    .venue-inner { transition: none; }
+    .page-footer { display: none; }
+  }
+  @media (hover: hover) {
+    .mobile-hint::after { content: 'HOVER TO REVEAL'; font-size: 7px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; opacity: 0.5; }
+    .card { perspective: 1200px; }
+    .card-inner { transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+    .card:hover .card-inner { transform: rotateY(180deg); }
+    .card-front { backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(0deg); position: relative; }
+    .card-back  { backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg); position: absolute; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HERO / MISSION
+════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-wordmark"><span class="wl-text">WEIGHT<span class="hl">LESS</span></span><span class="hl wl-dot">.</span></div>
+
+  <div class="mission-box" style="margin-top: 32px;">
+    <div class="mission-label">| Our Mission |</div>
+    <p class="mission-text">
+      Weightless is a Colorado-based not-for-profit arts collective on a mission to become a fully recognized nonprofit. We create and host <em>art spaces</em> — live music experiences, community events, and creative gatherings — designed to offer <em>refuge from the noise of modern life</em> and foster genuine human connection.
+    </p>
+  </div>
+
+
+</section>
+
+<!-- ═══════════════════════════════════════
+     ROSTER
+════════════════════════════════════════ -->
+<div class="roster-divider">
+  <div class="roster-tag">// Team Roster — Season One</div>
+  <div class="roster-line"></div>
+</div>
+
+<div class="card-grid" id="grid"></div>
+
+<div class="page-footer">
+  <div class="footer-text">| Hover Cards to Reveal |</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     VENUE SECTION
+════════════════════════════════════════ -->
+<div class="venue-section">
+  <div class="section-header">
+    <div class="section-tag">// Upcoming Free Shows</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="venue-grid">
+    <div class="venue-card" onclick="window.open('https://www.threyda.com','_blank')">
+      <div class="venue-inner">
+        <div class="venue-front">
+          <div class="venue-photo">
+            <img src="https://cdn.prod.website-files.com/6502152247d8718f20d59acc/69c02fbef52d0e69359dee8e_Threyda%20inside.png" alt="Threyda">
+            <div class="venue-photo-overlay"></div>
+            <div class="venue-name-overlay">
+              <div class="venue-name">THREYDA</div>
+              <div class="venue-url">threyda.com</div>
+            </div>
+          </div>
+          <div class="venue-dates">
+            <div class="venue-dates-label">// Scheduled Dates</div>
+            <div class="venue-dates-list">
+              <div class="venue-date"><span class="date-val">05.01.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">06.05.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">07.03.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">08.07.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">09.04.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-date"><span class="date-val">10.02.26</span><span class="date-time">5 – 10pm</span><span class="date-status">Confirmed</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="venue-back">
+          <div class="venue-back-top">
+            <div class="venue-back-name">THREYDA</div>
+            <div class="venue-back-sub">Denver, CO — First Friday</div>
+            <div class="venue-back-divider"></div>
+            <div class="venue-back-desc">First Friday art walk performances. Music from 5 to close.</div>
+            <div class="venue-back-dates">
+              <div class="venue-back-dates-label">// Scheduled Dates</div>
+              <div class="venue-back-date"><span class="date-val">05.01.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-back-date"><span class="date-val">06.05.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-back-date"><span class="date-val">07.03.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-back-date"><span class="date-val">08.07.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-back-date"><span class="date-val">09.04.26</span><span class="date-status">Confirmed</span></div>
+              <div class="venue-back-date"><span class="date-val">10.02.26</span><span class="date-status">Confirmed</span></div>
+            </div>
+          </div>
+          <div class="venue-back-link"><span>threyda.com</span><span>↗ CLICK TO VISIT</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SMS SIGNUP FORM
+════════════════════════════════════════ -->
+<div class="sms-section">
+  <div class="sms-inner">
+    <div class="sms-label">| Stay In The Loop |</div>
+    <div class="sms-heading">GET SHOW ALERTS</div>
+    <p class="sms-body">Drop your name and number. We'll text you when the next show drops — no spam, no noise, just signal.</p>
+
+    <form class="sms-form" action="https://formspree.io/f/xeevever" method="POST">
+      <input type="hidden" name="_subject" value="New Weightless Show Alert Signup">
+
+      <div class="sms-fields">
+        <div class="sms-field">
+          <label class="sms-field-label" for="sms-name">// Name</label>
+          <input class="sms-input" type="text" id="sms-name" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="sms-field">
+          <label class="sms-field-label" for="sms-phone">// Phone Number</label>
+          <input class="sms-input" type="tel" id="sms-phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
+        </div>
+      </div>
+
+      <button class="sms-btn" type="submit">
+        <span class="sms-btn-text">COUNT ME IN</span>
+        <span class="sms-btn-arrow">↗</span>
+      </button>
+
+      <p class="sms-fine-print">Colorado locals only. We text when it matters.</p>
+    </form>
+
+    <div class="sms-success" id="sms-success">
+      <div class="sms-success-icon">✓</div>
+      <div class="sms-success-text">YOU'RE IN THE LOOP</div>
+      <div class="sms-success-sub">We'll hit you when the next show drops.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     COMMUNITY / PATREON
+════════════════════════════════════════ -->
+<div class="community-section">
+  <div class="community-left">
+    <div class="community-eyebrow">| The Collective |</div>
+    <div class="community-heading">WEIGHTLESS<br>IS BUILT ON<br><span class="community-hl">PEOPLE.</span></div>
+    <p class="community-body">We're not a label. We're not a brand. We're a room full of people who believe art and community can still mean something. Patreon keeps the lights on and the shows happening — every supporter is part of the foundation.</p>
+    <a class="community-btn" href="https://patreon.com/weightless_community_arts" target="_blank">
+      Join on Patreon &nbsp;↗
+    </a>
+    <div class="community-stats">
+      <div class="community-stat">
+        <div class="community-stat-val">FREE</div>
+        <div class="community-stat-label">To Join</div>
+      </div>
+      <div class="community-stat-divider"></div>
+      <div class="community-stat">
+        <div class="community-stat-val">Monthly</div>
+        <div class="community-stat-label">Live Shows</div>
+      </div>
+      <div class="community-stat-divider"></div>
+      <div class="community-stat">
+        <div class="community-stat-val">IRL</div>
+        <div class="community-stat-label">Community</div>
+      </div>
+    </div>
+  </div>
+  <div class="community-right">
+    <div class="community-manifesto">
+      <div class="manifesto-line">// What you get</div>
+      <ul class="manifesto-list">
+        <li>Access to exclusive Patreon-only events at unconventional venues</li>
+        <li>VIP ticket upgrades to ticketed events</li>
+        <li>Voting power for future Weightless events</li>
+        <li>Behind-the-scenes access to the project</li>
+        <li>Exclusive content and information</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     OPEN POSITIONS
+════════════════════════════════════════ -->
+<div class="positions-section">
+  <div class="positions-header">
+    <div class="positions-tag">// Open Positions — Season One</div>
+    <div class="positions-line"></div>
+  </div>
+  <div class="positions-intro">
+    <p>Weightless runs on talent. If you have a skill and believe in what we're building, we want to hear from you.</p>
+  </div>
+  <div class="positions-grid">
+    <div class="position-card" onclick="openModal('Head of Marketing')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">HEAD OF MARKETING</div>
+      <div class="position-desc">Shape how the world sees Weightless. Strategy, outreach, and brand growth.</div>
+      <div class="position-footer"><span class="position-tag-pill">Marketing</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+    <div class="position-card" onclick="openModal('Social Media Manager')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">SOCIAL MEDIA MANAGER</div>
+      <div class="position-desc">Own our presence across platforms. Tell the Weightless story between shows.</div>
+      <div class="position-footer"><span class="position-tag-pill">Content</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+    <div class="position-card" onclick="openModal('Projection Mapping Visual Artist')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">PROJECTION MAPPING VISUAL ARTIST</div>
+      <div class="position-desc">Turn walls into worlds. Visual architecture for live performance.</div>
+      <div class="position-footer"><span class="position-tag-pill">Visual Arts</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+    <div class="position-card" onclick="openModal('Event Coordinator')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">EVENT COORDINATOR</div>
+      <div class="position-desc">Logistics, venue coordination, and the behind-the-scenes engine that makes shows happen.</div>
+      <div class="position-footer"><span class="position-tag-pill">Operations</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+    <div class="position-card" onclick="openModal('Photographer')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">PHOTOGRAPHER</div>
+      <div class="position-desc">Capture the energy in the room. Document the moments that make the mission real.</div>
+      <div class="position-footer"><span class="position-tag-pill">Media</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+    <div class="position-card" onclick="openModal('Videographer')">
+      <div class="position-id">WL-OPEN</div>
+      <div class="position-title">VIDEOGRAPHER</div>
+      <div class="position-desc">Film live sets, events, and behind-the-scenes content. Help us build the visual archive.</div>
+      <div class="position-footer"><span class="position-tag-pill">Media</span><span class="position-apply">Apply ↗</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-eyebrow">| How to Apply |</div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-divider"></div>
+    <p class="modal-body">Please email <a class="modal-email" href="mailto:carbonspins@gmail.com">carbonspins@gmail.com</a> with:</p>
+    <ul class="modal-list">
+      <li>The position you're interested in</li>
+      <li>A short paragraph about yourself</li>
+      <li>Any relevant past experience</li>
+    </ul>
+    <a class="modal-btn" href="mailto:carbonspins@gmail.com">Open Email ↗</a>
+  </div>
+</div>
+
+
+<script>
+const players = [
+  {
+    id: 'WL-000', num: '22',
+    name: 'CARBON', role: 'CAPTAIN', skills: 'BEATS | SYNTHS | VOCALS',
+    photo: 'https://cdn.prod.website-files.com/6502152247d8718f20d59acc/69c723a4e8051f4e1dc8980c_Gemini_Generated_Image_73fg7o73fg7o73fg.png',
+    imgClass: 'pos-carbon',
+    stats: [
+      { label: 'HOMETOWN', value: 'Halfmoon, NY' },
+      { label: 'SPECIALTY', value: 'Lift-off' },
+      { label: 'FOCUS', value: 'Architecture' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Alchemist',
+    bio: "The architect of Weightless. Carbon had the vision, assembled the team, and drafted the blueprints. A producer and live performer fusing beats, synthesis, and raw energy. An alchemist in the lab, building bridges between this world and the unknown.",
+    fact: 'Mapped every LED pad on his controller by hand. Twice.',
+    quote: "The music doesn't stop."
+  },
+  {
+    id: 'WL-001', num: '43',
+    name: 'SUPNOD', role: 'COACH', skills: 'BASS | SYNTHS | SAMPLES',
+    photo: 'https://cdn.prod.website-files.com/69c0157672f4fcb333dd173b/69c01a89ee0f00774156ddbb_Screenshot%202026-03-21%20at%203.58.22%E2%80%AFPM.png',
+    imgClass: 'pos-eric',
+    stats: [
+      { label: 'HOMETOWN', value: 'Chicago, IL' },
+      { label: 'SPECIALTY', value: 'Groove & Vibe' },
+      { label: 'FOCUS', value: 'Aegis' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Hierophant',
+    bio: "Low-end theorist and the compass of the project. SUPNOD balances the roles of coach and musician — guiding with wisdom while holding the groove. The project doesn't move without his read on the room.",
+    fact: 'Debugged a live rig mid-set without missing a note.',
+    quote: 'Hold the groove, hold the vision.'
+  },
+  {
+    id: 'WL-002', num: '94',
+    name: 'KAYLA', role: 'CREATOR OF WORLDS', skills: 'SPATIAL STORYTELLER',
+    photo: 'https://cdn.prod.website-files.com/69c0157672f4fcb333dd173b/69c01c8a4d0363a36edf5e52_Screenshot%202026-03-21%20at%204.01.25%E2%80%AFPM.png',
+    imgClass: 'pos-kayla',
+    stats: [
+      { label: 'HOMETOWN', value: 'Denver, CO' },
+      { label: 'SPECIALTY', value: 'Light & Space' },
+      { label: 'FOCUS', value: 'Space' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Mystic',
+    bio: "Kayla turns rooms into worlds. Her instinct for spatial storytelling and lighting architecture shapes the emotional environment of every Weightless show before a single note is played.",
+    fact: 'Her sketchbooks are not safe for feeble minds.',
+    quote: 'The stage is the first instrument.'
+  },
+  {
+    id: 'WL-003', num: '33',
+    name: 'SAM', role: 'ASSISTANT CAPTAIN', skills: 'BASS | TECH | MERCH',
+    photo: 'https://cdn.prod.website-files.com/69c0157672f4fcb333dd173b/69c01c7a0f9a530ad3442282_Screenshot%202026-03-22%20at%2010.44.09%E2%80%AFAM.png',
+    stats: [
+      { label: 'HOMETOWN', value: 'Clifton Park, NY' },
+      { label: 'SPECIALTY', value: 'Systems & Low End' },
+      { label: 'FOCUS', value: 'Infrastructure' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Emperor',
+    bio: "Systems architect by day, bassist by night. Sam keeps the entire Weightless operation running — from gear logistics to merch drops. If something's plugged in on stage, Sam knows why.",
+    fact: 'Has never missed a soundcheck. Not once.',
+    quote: "If it's not dialed in, it's not ready."
+  },
+  {
+    id: 'WL-004', num: '333',
+    name: 'KNOTHING', role: 'TURNTABLIST', skills: 'SCRATCHING | SAMPLES',
+    photo: 'https://cdn.prod.website-files.com/6502152247d8718f20d59acc/69d59fa3c6d282c926aebf68_Screenshot%202026-04-07%20at%206.21.26%E2%80%AFPM.png',
+    stats: [
+      { label: 'HOMETOWN', value: 'Denver, CO' },
+      { label: 'SPECIALTY', value: 'Scratching & Samples' },
+      { label: 'FOCUS', value: 'Story' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Wanderer',
+    bio: "A producer and turntablist rooted in bass music and the art of scratching. Free-spirited by nature, he's the first one dancing and the last one to stop. Guide to the unique stories being told each set.",
+    fact: "Purchases his next turntable before his previous one arrives through shipping.",
+    quote: "Let's make it happen.."
+  },
+  {
+    id: 'WL-005', num: '??',
+    name: 'BLOSSOMN', role: 'LIVE PERCUSSION', skills: 'DRUMS | PERCUSSION',
+    photo: 'https://cdn.prod.website-files.com/6502152247d8718f20d59acc/69d59fa2af7d40aa66e82747_Screenshot%202026-04-07%20at%206.19.48%E2%80%AFPM.png',
+    imgClass: 'pos-blossomn',
+    stats: [
+      { label: 'HOMETOWN', value: '—' },
+      { label: 'SPECIALTY', value: 'Live Percussion' },
+      { label: 'FOCUS', value: 'Rhythm' },
+      { label: 'STATUS', value: 'Active' }
+    ],
+    archetype: 'The Warden',
+    bio: "A composer and sonic explorer with roots in beats, world music, and progressive jazz. Blossomn translates his deep relationship with texture and rhythm into something visceral on stage — live hand percussion that grounds the Weightless experience in something ancient.",
+    fact: 'His field recorder has more miles on it than his car.',
+    quote: "Feel it first. Understand it later."
+  }
+];
+
+const PLACEHOLDER_PHOTO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='280' viewBox='0 0 400 280'%3E%3Crect width='400' height='280' fill='%230d1117'/%3E%3Ccircle cx='200' cy='110' r='48' fill='%23111620'/%3E%3Crect x='120' y='175' width='160' height='80' rx='6' fill='%23111620'/%3E%3Ctext x='200' y='250' font-family='monospace' font-size='11' fill='%234a5568' text-anchor='middle' letter-spacing='3'%3EPHOTO TBD%3C/text%3E%3C/svg%3E";
+
+function buildCard(p) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  const photo = p.photo || PLACEHOLDER_PHOTO;
+
+        const archPatternMap = {
+          'WL-000': 'arch-violet',
+          'WL-001': 'arch-cyan',
+          'WL-002': 'arch-ember',
+          'WL-003': 'arch-gold',
+          'WL-004': 'arch-cyan',
+          'WL-005': 'arch-violet'
+        };
+        const archClass = archPatternMap[p.id] || 'arch-cyan';
+  card.innerHTML = `    <div class="card-inner">
+      <div class="card-front">
+        <div class="card-band ${archClass}">
+          <span class="card-id">${p.id}</span>
+          <span class="card-num-badge">#${p.num}</span>
+        </div>
+        <div class="card-photo">
+          <img src="${photo}" alt="${p.name}" loading="lazy" class="${p.imgClass || ''}">
+          <div class="card-photo-overlay"></div>
+          <div class="scan-line"></div>
+          <div class="card-jersey">${p.num}</div>
+          <div class="card-name-overlay">
+            <div class="card-name">${p.name}</div>
+            <div class="card-role"><div class="status-dot"></div>${p.role}</div>
+            <div class="card-skills">${p.skills}</div>
+          </div>
+        </div>
+        <div class="card-stats">
+          ${p.stats.map(s => `
+            <div class="stat-cell">
+              <div class="stat-label">${s.label}</div>
+              <div class="stat-value">${s.value}</div>
+            </div>`).join('')}
+        </div>
+        <div class="card-archetype ${archClass}">
+          <div class="archetype-label">| Archetype |</div>
+          <div class="archetype-value">${p.archetype}</div>
+        </div>
+      </div>
+
+      <div class="card-back">
+        <div>
+          <div class="back-top">
+            <div class="back-name-block">
+              <div class="back-name">${p.name}</div>
+              <div class="back-project">WEIGHTLESS PROJECT</div>
+            </div>
+            <div class="back-avatar">
+              <img src="${photo}" alt="${p.name}">
+            </div>
+          </div>
+          <div class="back-divider"></div>
+          <div class="back-bio">${p.bio}</div>
+          <div class="back-fact">
+            <div class="back-fact-label">| Fun Fact |</div>
+            <div class="back-fact-text">${p.fact}</div>
+          </div>
+        </div>
+        <div class="back-quote-wrap">
+          <div class="back-quote">${p.quote}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // mobile tap
+  card.addEventListener('click', () => {
+    if (window.matchMedia('(hover: none)').matches) {
+      card.classList.toggle('tapped');
+    }
+  });
+
+  return card;
+}
+
+document.getElementById('grid').append(...players.map(buildCard));
+
+// Auto-scale bio text to fit card back
+function fitBio(card) {
+  const back = card.querySelector('.card-back');
+  const bio  = card.querySelector('.back-bio');
+  if (!back || !bio) return;
+
+  // Reset to max size first
+  bio.style.fontSize = '14px';
+  bio.style.lineHeight = '1.75';
+
+  // Available height = card-back total - everything else
+  const backH     = back.clientHeight;
+  const topH      = card.querySelector('.back-top')?.offsetHeight  || 0;
+  const divH      = card.querySelector('.back-divider')?.offsetHeight || 0;
+  const factH     = card.querySelector('.back-fact')?.offsetHeight  || 0;
+  const quoteH    = card.querySelector('.back-quote-wrap')?.offsetHeight || 0;
+  const padding   = 22 + 18 + 14 + 14 + 16 + 16; // top/bottom pad + margins
+  const available = backH - topH - divH - factH - quoteH - padding;
+
+  let size = 14;
+  while (bio.scrollHeight > available && size > 8) {
+    size -= 0.5;
+    bio.style.fontSize = size + 'px';
+    bio.style.lineHeight = size < 11 ? '1.55' : '1.65';
+  }
+}
+
+function fitAllBios() {
+  document.querySelectorAll('.card').forEach(fitBio);
+}
+
+// Run after fonts load and on resize
+document.fonts.ready.then(fitAllBios);
+window.addEventListener('resize', fitAllBios);
+
+// Also observe individual card size changes
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(() => fitAllBios());
+  document.querySelectorAll('.card').forEach(c => ro.observe(c));
+}
+
+
+// Open Positions Modal
+function openModal(role) {
+  document.getElementById('modal-title').textContent = role.toUpperCase();
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// SMS Form — Formspree AJAX submission
+const smsForm = document.querySelector('.sms-form');
+const smsSuccess = document.getElementById('sms-success');
+if (smsForm) {
+  smsForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = smsForm.querySelector('.sms-btn');
+    const btnText = btn.querySelector('.sms-btn-text');
+    btnText.textContent = 'SENDING...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(smsForm.action, {
+        method: 'POST',
+        body: new FormData(smsForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        smsForm.style.display = 'none';
+        smsSuccess.style.display = 'flex';
+      } else {
+        btnText.textContent = 'COUNT ME IN';
+        btn.disabled = false;
+        alert('Something went wrong — try again.');
+      }
+    } catch {
+      btnText.textContent = 'COUNT ME IN';
+      btn.disabled = false;
+      alert('Something went wrong — try again.');
+    }
+  });
+} </script>
+</body>
+</html>
