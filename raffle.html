@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weightless — Raffle</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:#080a0e;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Share Tech Mono',monospace;
+    padding:24px;
+  }
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);
+    background-size:32px 32px;
+    pointer-events:none;
+    z-index:0;
+  }
+  body::after{
+    content:'';
+    position:fixed;
+    top:-200px;left:50%;transform:translateX(-50%);
+    width:600px;height:600px;
+    background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 65%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .card{
+    position:relative;z-index:1;
+    background:rgba(8,10,14,.97);
+    border:1px solid rgba(0,212,255,.22);
+    border-radius:12px;
+    padding:48px 40px 44px;
+    width:100%;max-width:400px;
+    text-align:center;
+  }
+  .logo-row{
+    display:flex;align-items:center;justify-content:center;
+    gap:12px;margin-bottom:6px;
+  }
+  .logo-mark{
+    width:36px;height:36px;
+    border:1.5px solid rgba(0,212,255,.45);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .wordmark{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:40px;letter-spacing:.06em;
+    color:#fff;line-height:1;
+  }
+  .wordmark span{color:#00d4ff;}
+  .sub{
+    font-size:10px;letter-spacing:.35em;
+    color:rgba(255,255,255,.22);
+    text-transform:uppercase;margin-bottom:32px;
+  }
+  .divider{
+    width:100%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(0,212,255,.4),transparent);
+    margin-bottom:30px;
+  }
+  .headline{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:52px;line-height:.95;
+    color:#fff;letter-spacing:.02em;
+    margin-bottom:12px;
+  }
+  .headline span{color:#00d4ff;}
+  .sub-copy{
+    font-size:12px;color:rgba(255,255,255,.4);
+    line-height:1.8;margin-bottom:32px;
+  }
+
+  /* form */
+  .field-label{
+    display:block;
+    font-size:10px;letter-spacing:.3em;
+    color:rgba(0,212,255,.6);
+    text-transform:uppercase;
+    text-align:left;margin-bottom:8px;
+  }
+  .phone-wrap{
+    display:flex;gap:0;margin-bottom:16px;
+    border:1px solid rgba(0,212,255,.3);
+    border-radius:6px;overflow:hidden;
+  }
+  .phone-wrap:focus-within{
+    border-color:rgba(0,212,255,.7);
+    box-shadow:0 0 0 3px rgba(0,212,255,.08);
+  }
+  .country-code{
+    background:rgba(0,212,255,.07);
+    color:rgba(0,212,255,.8);
+    font-family:'Share Tech Mono',monospace;
+    font-size:14px;
+    padding:0 14px;
+    display:flex;align-items:center;
+    border-right:1px solid rgba(0,212,255,.2);
+    flex-shrink:0;
+    user-select:none;
+  }
+  input[type="tel"]{
+    flex:1;
+    background:transparent;
+    border:none;outline:none;
+    color:#fff;
+    font-family:'Share Tech Mono',monospace;
+    font-size:15px;
+    padding:14px 16px;
+    letter-spacing:.08em;
+  }
+  input[type="tel"]::placeholder{color:rgba(255,255,255,.2);}
+
+  .btn{
+    width:100%;
+    background:#00d4ff;
+    color:#080a0e;
+    border:none;
+    border-radius:6px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:22px;
+    letter-spacing:.1em;
+    padding:14px;
+    cursor:pointer;
+    transition:opacity .15s,transform .1s;
+  }
+  .btn:hover{opacity:.88;}
+  .btn:active{transform:scale(.98);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+
+  .fine-print{
+    font-size:10px;color:rgba(255,255,255,.2);
+    line-height:1.7;margin-top:20px;
+  }
+
+  /* success state */
+  .success{display:none;text-align:center;padding:20px 0;}
+  .success .check{
+    width:56px;height:56px;
+    border:2px solid #00d4ff;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 20px;
+  }
+  .success h2{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:40px;color:#fff;
+    letter-spacing:.04em;margin-bottom:8px;
+  }
+  .success h2 span{color:#00d4ff;}
+  .success p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+
+  .error-msg{
+    font-size:11px;color:#ff4d4d;
+    margin-top:8px;display:none;
+    text-align:left;letter-spacing:.05em;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="logo-row">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="8" stroke="#00d4ff" stroke-width="1.2"/>
+        <path d="M7 11 Q11 5 15 11 Q11 17 7 11Z" fill="rgba(0,212,255,.18)" stroke="#00d4ff" stroke-width=".9"/>
+        <circle cx="11" cy="11" r="1.8" fill="#00d4ff"/>
+      </svg>
+    </div>
+    <div class="wordmark">WEIGHT<span>LESS</span></div>
+  </div>
+  <p class="sub">Community Arts Collective</p>
+
+  <div class="divider"></div>
+
+  <div id="form-view">
+    <h1 class="headline">ENTER<br><span>THE</span><br>RAFFLE</h1>
+    <p class="sub-copy">Drop your number below.<br>One winner — announced live tonight.</p>
+
+    <label class="field-label" for="phone">Your phone number</label>
+    <div class="phone-wrap">
+      <div class="country-code">+1</div>
+      <input type="tel" id="phone" placeholder="(303) 555-0100" maxlength="14" autocomplete="tel" inputmode="numeric">
+    </div>
+    <p class="error-msg" id="error">Please enter a valid 10-digit number.</p>
+
+    <button class="btn" id="submit-btn" onclick="handleSubmit()">ENTER NOW</button>
+
+    <p class="fine-print">
+      By entering, you agree to receive one text notification if you win.<br>
+      No spam. Ever.
+    </p>
+  </div>
+
+  <div class="success" id="success-view">
+    <div class="check">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <polyline points="4,13 9,18 20,7" stroke="#00d4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>YOU'RE<br><span>IN.</span></h2>
+    <p>Entry confirmed.<br>Stay close — we're drawing live tonight.<br><br>Welcome to the collective.</p>
+  </div>
+
+</div>
+<script>
+  const phone = document.getElementById('phone');
+  const error = document.getElementById('error');
+
+  phone.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'');
+    if(v.length >= 7) {
+      v = '('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6,10);
+    } else if(v.length >= 4) {
+      v = '('+v.slice(0,3)+') '+v.slice(3);
+    } else if(v.length > 0) {
+      v = '('+v;
+    }
+    this.value = v;
+    error.style.display = 'none';
+  });
+
+  function handleSubmit() {
+    const digits = phone.value.replace(/\D/g,'');
+    if(digits.length !== 10) {
+      error.style.display = 'block';
+      phone.focus();
+      return;
+    }
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'ENTERING...';
+
+    fetch('https://formspree.io/f/xeevever', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ phone: '+1' + digits, source: 'weightless-raffle' })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) {
+        document.getElementById('form-view').style.display = 'none';
+        document.getElementById('success-view').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'ENTER NOW';
+        error.textContent = 'Something went wrong. Try again.';
+        error.style.display = 'block';
+      }
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btn.textContent = 'ENTER NOW';
+      error.textContent = 'Connection error. Try again.';
+      error.style.display = 'block';
+    });
+  }
+
+  phone.addEventListener('keydown', function(e) {
+    if(e.key === 'Enter') handleSubmit();
+  });
+</script>
+</body>
+</html>
