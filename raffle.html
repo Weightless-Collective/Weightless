@@ -188,7 +188,7 @@
 
   <div id="form-view">
     <h1 class="headline">ENTER<br><span>THE</span><br>RAFFLE</h1>
-    <p class="sub-copy">Drop your number below.<br>One winner — announced live tonight.</p>
+    <p class="sub-copy">Drop your number below.<br>One winner — announced live tonight.<br><span style="color:rgba(0,212,255,.45);">You'll also receive future event updates from Weightless Collective.</span></p>
 
     <label class="field-label" for="phone">Your phone number</label>
     <div class="phone-wrap">
@@ -200,8 +200,9 @@
     <button class="btn" id="submit-btn" onclick="handleSubmit()">ENTER NOW</button>
 
     <p class="fine-print">
-      By entering, you agree to receive one text notification if you win.<br>
-      No spam. Ever.
+      By entering, you consent to receive text messages from Weightless Collective,
+      including winner notifications and future event updates. Message &amp; data rates may apply.
+      Reply STOP at any time to opt out.
     </p>
   </div>
 
@@ -222,6 +223,10 @@
 
   phone.addEventListener('input', function() {
     let v = this.value.replace(/\D/g,'');
+    // Strip leading country code (+1 or just 1) that autofill may inject
+    if (v.length === 11 && v.charAt(0) === '1') {
+      v = v.slice(1);
+    }
     if(v.length >= 7) {
       v = '('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6,10);
     } else if(v.length >= 4) {
